@@ -1,0 +1,23 @@
+{
+  "name": "movie-ticket",
+  "version": "1.0.0",
+  "description": "The Backend of BMS inspired movie ticketing based project",
+  "main": "app.js",
+  "scripts": {
+    "start": "node bin/www",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RohitPPednekar/Movie-Ticket-Backend.git"
+  },
+  "author": "Rohit Pednekar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RohitPPednekar/Movie-Ticket-Backend/issues"
+  },
+  "homepage": "https://github.com/RohitPPednekar/Movie-Ticket-Backend#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
