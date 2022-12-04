@@ -3,6 +3,8 @@ const app = express();
 const {responseHandler} = require('./src/services/response-handler.service');
 const { routerEndPoints, statusCodeKeys, statusCodeMessage } = require('./src/config/constant');
 const indexRouter = require('./src/routes/index.router');
+const db = require("./src/models");
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
