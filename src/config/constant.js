@@ -20,7 +20,10 @@ const statusCodeMessage = {
 
 
 const routerEndPoints = {
-
+    baseURLPath: '/',
+    onBoardURLPath: '/auth',
+    signupURLPath: '/sign-up',
+    loginURLPath: '/login'
 };
 
 module.exports = {

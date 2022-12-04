@@ -1,20 +1,18 @@
-const express    = require('express');
-const app        = express();
-const {responseHandler}        = require('./src/services/response-handler.service');
-const constants        = require('./src/config/constant');
-
+const express  = require('express');
+const app = express();
+const {responseHandler} = require('./src/services/response-handler.service');
+const { routerEndPoints, statusCodeKeys, statusCodeMessage } = require('./src/config/constant');
+const indexRouter = require('./src/routes/index.router');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 
-app.get("/", (request, response)=>{
-response.send("hello world")
-})
+app.use(routerEndPoints.baseURLPath, indexRouter);
 
 
 app.use((error, request, response, next) => {
-    responseHandler(response, constants.statusCodeMessage.internalServer, constants.statusCodeKeys.internalServerCode, null, error);
+    responseHandler(response, statusCodeMessage.internalServer, statusCodeKeys.internalServerCode, null, error);
 });
 
 
@@ -28,7 +26,7 @@ process.on('uncaughtException', (error) => {
 
 
 app.use('*', (request, response) => {
-    responseHandler(response, constants.statusCodeMessage.notFound, constants.statusCodeKeys.notFoundCode);
+    responseHandler(response, statusCodeMessage.notFound, statusCodeKeys.notFoundCode);
 });
 
 
