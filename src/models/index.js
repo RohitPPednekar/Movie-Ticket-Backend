@@ -1,7 +1,8 @@
 const dbConfig = require("../config/db.config.js");
 
 const Sequelize = require("sequelize");
-const sequelize = new Sequelize(dbConfig.HOST)
+//const sequelize = new Sequelize(dbConfig.HOST)
+const sequelize = new Sequelize('sqlite::memory:');
 const User = require("./user.model")(sequelize, Sequelize);
 const Location = require("./location.model")(sequelize, Sequelize);
 const Cinema = require("./cinema.model")(sequelize, Sequelize);
