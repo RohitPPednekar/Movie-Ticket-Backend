@@ -5,6 +5,11 @@ const { getToken, comparePassword, hashPassword } = require("../utils/helper");
 const models = require("../models");
 
 
+/*
+*   Description: signUpController Controller for new user entity creation
+*   Input: JSON Body Param
+*   Output: JSON (as Mentioned in Swagger API Doc)
+*/
 const signUpController = async (request, response)=>{
     try{
         const payload = request.body;
@@ -18,6 +23,11 @@ const signUpController = async (request, response)=>{
     }
 };
 
+/*
+*   Description: loginController Controller for validating user authentication
+*   Input: JSON Body Param
+*   Output: JSON (as Mentioned in Swagger API Doc)
+*/
 const loginController = async (request, response)=>{
     try{
         const payload = request.body;

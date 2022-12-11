@@ -36,6 +36,8 @@ const routerEndPoints = {
     manageCinemaURLPath: '/manage-cinema',
     getCinemaURLPath: '/cinemas',
     manageShowsURLPath: '/manage-shows',
+    locationShowsURLPath: '/location-shows',
+    cinemaShowsURLPath: '/cinema-shows',
     movieTicketAPIDocURLPath: '/ticket-api-doc',
 };
 

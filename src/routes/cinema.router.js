@@ -8,6 +8,5 @@ router.post(routerEndPoints.baseURLPath, postCinema);
 
 
 
-
 module.exports = router;
 

@@ -253,23 +253,100 @@
                     }
                 }
             }
+        },
+        "/manage-shows/location-shows" : {
+            "post" : {
+                "summary" : "Fetch Shows Based on Locations",
+                "description": "Ability to view all the movies playing in your city",
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "locationPincode": {
+                                    "type": "string"
+                               }
+                            }
+                        }
+                        
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/todosResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/manage-shows/cinema-shows" : {
+            "post" : {
+                "summary" : "Fetch movie shows based on all the Cinemas",
+                "description": "Ability to check all cinemas in which a movie is playing along with all the showtimes.",
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "currentDate": {
+                                    "type": "string",
+                                    "example": "2022-07-01"
+                               },
+                               "currentTime": {
+                                    "type": "string",
+                                    "example": "02:30:10"
+                                }
+                            }
+                        }
+                        
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/todosResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
         }
     }, 
     "definitions": {
         "todosResponse": {
             "type": "object",
             "properties": {
-                "id": {
-                     "type": "integer"
+                "message": {
+                     "type": "string"
                 },
-                "task": {
-                    "type": "string"
-                },
-                "assignee": {
-                    "type": "string"
-                },
-                "status": {
-                    "type": "string"
+                "data": {
+                    "type": "object"
                 }
             }
         },
@@ -331,11 +408,14 @@
         "InvalidResponse": {
             "type": "object",
             "properties": {
-                "statusCode": {
-                    "type": "string"
-                },
                 "message": {
                     "type": "string"
+                },
+                "data": {
+                    "type": "object"
+                },
+                "error": {
+                    "type": "object"
                 }
             }
 
