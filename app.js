@@ -13,12 +13,16 @@ const customCss = fs.readFileSync((process.cwd()+"/public/swagger/swagger.css"),
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(routerEndPoints.movieTicketAPIDocURLPath, swaggerUi.serve, swaggerUi.setup(swaggerDocument, {customCss}));
+app.use(routerEndPoints.movieTicketAPIDocURLPath, (request, response, next)=>{
+    swaggerDocument.host = request.get('host');
+    request.swaggerDoc = swaggerDocument;
+    next();
+}, swaggerUi.serve, swaggerUi.setup(swaggerDocument, {customCss}));
 
 app.use(routerEndPoints.baseURLPath, indexRouter);
 
 
-app.use((error, request, response, next) => {
+app.use((error, request, response, next) => {console.log(error)
     responseHandler(response, statusCodeMessage.internalServer, statusCodeKeys.internalServerCode, null, error);
 });
 

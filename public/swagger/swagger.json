@@ -14,8 +14,16 @@
         }
     },
     "schemes": ["http"],
-    "host": "localhost:3000",
+    "host": "",
     "basePath": "/",
+    "securityDefinitions": {
+        "Bearer": {
+            "type": "apiKey",
+            "name": "authorization",
+            "in": "header",
+            "description": "Authentication token"
+        }
+    },
     "paths" : {
         "/auth/sign-up" : {
             "post" : {
@@ -312,6 +320,51 @@
                                "currentTime": {
                                     "type": "string",
                                     "example": "02:30:10"
+                                }
+                            }
+                        }
+                        
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/todosResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/manage-shows/book-seats" : {
+            "post" : {
+                "security": [{
+                    "Bearer": []
+                }],
+                "summary" : "Request seats in the movie show",
+                "description": "Request seats in the movie show",
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "seats": {
+                                    "type": "integer"
+                               },
+                               "movieShowId": {
+                                    "type": "integer"
                                 }
                             }
                         }

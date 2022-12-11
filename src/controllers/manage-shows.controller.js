@@ -89,8 +89,34 @@ const postMovieShows = async (request, response)=>{
     }
 };
 
+
+/*
+*   Description: postBookMovieShows Controller for booking movie show tickets in the Cinema
+*   Input: JSON Body Param
+*   Output: JSON (as Mentioned in Swagger API Doc)
+*/
+const postBookMovieShows = async (request, response)=>{
+    try{
+        const payload = request.body;
+        const isPayloadValid = (payload && parseInt(payload.seats) && parseInt(payload.movieShowId) ? true : false );
+        if(!isPayloadValid) return responseHandler(response, statusCodeMessage.badRequest, statusCodeKeys.badRequestCode);
+        const getMovieShow = await models.movieShows.findOne({ where: { id: parseInt(payload.movieShowId)}});
+        if(!getMovieShow) return responseHandler(response, customResponseMessage.unknownMovieShow, statusCodeKeys.badRequestCode);
+        if(getMovieShow.seats < payload.seats) return responseHandler(response, customResponseMessage.nonExistSeatCount, statusCodeKeys.badRequestCode);
+        let seatsCount = getMovieShow.seats - payload.seats;
+        const movieShowsUpdated = await models.movieShows.update(
+            { seats:  seatsCount},
+            { where: { id: parseInt(payload.movieShowId) } }
+        );
+        return responseHandler(response, statusCodeMessage.success, statusCodeKeys.successCode, movieShowsUpdated); 
+    }catch(error){
+        return responseHandler(response, statusCodeMessage.internalServer, statusCodeKeys.internalServerCode, null, error);
+    }
+};
+
 module.exports = {
     getLocationShows,
     postMovieShows,
-    getAllCinemaShows
+    getAllCinemaShows,
+    postBookMovieShows
 }

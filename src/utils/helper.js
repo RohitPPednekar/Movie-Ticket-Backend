@@ -1,6 +1,8 @@
-const jwt = require("jsonwebtoken")
-const {jwtAlgorithm, jwtKey, jwtExpirySeconds} = require("../config/config")
-const bcrypt = require("bcrypt")
+const jwt = require("jsonwebtoken");
+const {jwtAlgorithm, jwtKey, jwtExpirySeconds} = require("../config/config");
+const { responseHandler } = require("../services/response-handler.service");
+const { statusCodeKeys, statusCodeMessage, customResponseMessage } = require("../config/constant");
+const bcrypt = require("bcrypt");
 
 
 exports.isValidSignUpPayload = (bodyPayload) => {
@@ -80,3 +82,14 @@ exports.getShowEndTime = (movieDuration, movieStartTime) => {
     return movieEndDate;
 }
 
+exports.isValidUser = (request, response, next) => {
+    const token = request.headers["authorization"];
+    if (!token) return responseHandler(response, statusCodeMessage.unauthorized, statusCodeKeys.unauthorizedCode);
+    try {
+      const decoded = jwt.verify(token, jwtKey);
+      console.log(decoded);
+    } catch (err) {
+      return responseHandler(response, statusCodeMessage.badRequest, statusCodeKeys.badRequestCode);
+    }
+    return next();
+  };

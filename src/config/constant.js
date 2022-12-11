@@ -23,6 +23,8 @@ const statusCodeMessage = {
 const customResponseMessage = {
     unknownPincode: "Unknown Pincode !",
     unknownMovie: "Unknown Movie !",
+    unknownMovieShow: "Unknown Movie Show!",
+    nonExistSeatCount: "Requested seats are not available!",
 };
 
 
@@ -38,6 +40,7 @@ const routerEndPoints = {
     manageShowsURLPath: '/manage-shows',
     locationShowsURLPath: '/location-shows',
     cinemaShowsURLPath: '/cinema-shows',
+    bookSeatsURLPath: '/book-seats',
     movieTicketAPIDocURLPath: '/ticket-api-doc',
 };
 

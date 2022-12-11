@@ -9,6 +9,6 @@ Project is built with the development of few design patterns considering as,
 
 
 Below steps to run on the local environment:- 
-1. Download & Install globally to run the project :- Nodejs
+1. Download & Install globally to run the project :- Nodejs and npm
 2. Install all the required dependencies :- npm install
 3. Run the project :- npm start
