@@ -6,7 +6,7 @@ const sequelize = new Sequelize('sqlite::memory:');
 const User = require("./user.model")(sequelize, Sequelize);
 const Location = require("./location.model")(sequelize, Sequelize);
 const Cinema = require("./cinema.model")(sequelize, Sequelize);
-const MovieShows = require("./movie_shows.model")(sequelize, Sequelize);
+const MovieShows = require("./movie-shows.model")(sequelize, Sequelize);
 
 sequelize.authenticate().then(() => {
     console.log('Connection has been established successfully.');

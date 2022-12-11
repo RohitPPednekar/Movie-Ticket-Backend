@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const {getLocations, postLocations} = require('../controllers/manage_locations.controller');
+const {getLocations, postLocations} = require('../controllers/manage-locations.controller');
 const { routerEndPoints } = require('../config/constant');
 
 router.get(routerEndPoints.locationsAccessURLPath, getLocations);

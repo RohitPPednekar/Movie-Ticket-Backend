@@ -1,4 +1,3 @@
-const { isValidLoginPayload, isValidSignUpPayload } = require("../utils/helper");
 const { responseHandler } = require("../services/response-handler.service");
 const { statusCodeKeys, statusCodeMessage } = require("../config/constant");
 const models = require("../models");

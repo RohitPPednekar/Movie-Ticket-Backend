@@ -15,6 +15,15 @@ module.exports = (sequelize, Sequelize) => {
       seats: {
         type: Sequelize.INTEGER
       },
+      per_seat_price: {
+        type: Sequelize.INTEGER
+      },
+      movie_duration_time: {
+        type: Sequelize.STRING
+      },
+      movie_show_end_time: {
+        type: Sequelize.DATE
+      },
     },{
         timestamps: true
     });

@@ -13,7 +13,7 @@ const customCss = fs.readFileSync((process.cwd()+"/public/swagger/swagger.css"),
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, {customCss}));
+app.use(routerEndPoints.movieTicketAPIDocURLPath, swaggerUi.serve, swaggerUi.setup(swaggerDocument, {customCss}));
 
 app.use(routerEndPoints.baseURLPath, indexRouter);
 

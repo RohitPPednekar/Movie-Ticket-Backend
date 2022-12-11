@@ -54,8 +54,8 @@
         },
         "/auth/login" : {
             "post" : {
-                "summary" : "Save the task",
-                "description": "Save the task",
+                "summary" : "Access User Token",
+                "description": "Access the user based token for Protected routes",
                 "produces": ["application/json"],
                 "consumes": ["application/json"],
                 "parameters": [
@@ -88,31 +88,47 @@
                 }
             }
         },
-        "/todos/{id}" : {
-            "put" : {
-                "summary" : "Update the tasks",
-                "description": "Update the tasks",
+        "/location/pincodes" : {
+            "get" : {
+                "summary" : "Fetch locations",
+                "description": "Fetch all the locations",
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/todosResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/location" : {
+            "post" : {
+                "summary" : "Create locations",
+                "description": "Create new locations for further cinema entity",
                 "produces": ["application/json"],
                 "parameters": [
                     {
-                        "name": "id",
-                        "in": "path",
-                        "description": "task id that needs to be deleted",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
+                        "name": "locationPincode",
                         "in": "body",
-                        "name": "body",
-                        "description": "task object",
+                        "description": "Pincode of any locations",
                         "required": true,
+                        "type": "object",
                         "schema": {
                             "type": "object",
                             "properties": {
-                                "task" : {
-                                    "type": "object",
-                                    "$ref": "#/definitions/Task"
-                                } 
+                                "locationPincode": {
+                                     "type": "string"
+                                }
                             }
                         }
                     }
@@ -136,18 +152,87 @@
                 }
             }
         },
-        "/todo/{id}" : {
-            "delete" : {
-                "summary" : "Delete the task",
-                "description": "Delete the task",
+        "/manage-cinema" : {
+            "post" : {
+                "summary" : "Create Cinema",
+                "description": "Create new cinema mapping with location pincode",
                 "produces": ["application/json"],
                 "parameters": [
                     {
-                        "name": "id",
-                        "in": "path",
-                        "description": "task id that needs to be deleted",
+                        "name": "locationPincode",
+                        "in": "body",
+                        "description": "Pincode of any locations",
                         "required": true,
-                        "type": "string"
+                        "type": "object",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "cinemaName": {
+                                     "type": "string"
+                                },
+                                "locationPincode": {
+                                    "type": "string"
+                               }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/todosResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/manage-cinema/cinemas" : {
+            "get" : {
+                "summary" : "Fetch all Cinemas",
+                "description": "Fetch all the Cinemas irrespective of the locations",
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/todosResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/manage-shows" : {
+            "post" : {
+                "summary" : "Create Shows",
+                "description": "Create shows in the Cinema",
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/shows"
+                        }
+                        
                     }
                 ],
                 "responses": {
@@ -211,6 +296,36 @@
                 "password": {
                     "type": "string"
                 }
+            }
+        },
+        "shows": {
+            "type": "object",
+            "properties": {
+                "movie_show": {
+                    "type": "string"
+                },
+                "seats": {
+                    "type": "integer"
+                },
+                "per_seat_price": {
+                    "type": "integer"
+                },
+                "movieDate": {
+                    "type": "string",
+                    "example": "2022-07-01"
+                },
+                "movieTime": {
+                    "type": "string",
+                    "example": "15:30"
+                },
+                "cinemaId": {
+                    "type": "integer"
+                },
+                "movie_duration_time": {
+                    "type": "string",
+                    "example": "02:30:10"
+                }
+    
             }
         },
         "InvalidResponse": {
