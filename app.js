@@ -8,7 +8,11 @@ const db = require("./src/models");
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./public/swagger/swagger.json');
 const customCss = fs.readFileSync((process.cwd()+"/public/swagger/swagger.css"), 'utf8');
+const cors = require('cors');
 
+
+
+app.use(cors({origin: '*'}));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
